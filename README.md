@@ -16,6 +16,8 @@
 ### Ibarra Aguayo Jose Carlos 
 ### Num de control: 24308060610005
 ### Correo: 24308060610005@cetis61.edu.mx
+<img width="100" height="100" alt="jose" src="https://github.com/user-attachments/assets/a2a24a15-68f2-4997-a97e-ce79b18628bb" />
+
 
 
 
