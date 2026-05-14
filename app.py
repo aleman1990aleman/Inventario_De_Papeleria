@@ -18,13 +18,39 @@ def login():
         password = request.form.get("password")
         usuario = inventario.acceder(email, password)
         if usuario != None:
-            return redirect(url_for("gestor"))
+            return redirect(url_for("place"))
         elif usuario == None:
             flash("Error al iniciar sesión", "error")
             return redirect(url_for("index"))
         else:
             flash("Ya tienes una cuenta", "error")
             return redirect(url_for("index"))
+        
+@app.route('/registro')
+def registro():
+    if usuario != None:
+        return redirect(url_for("place"))
+    return render_template("registro.html")
+
+@app.route("/registrar", methods=["POST", "GET"])
+def registrar():
+    error = None
+    inventario = Inventario()
+    if request.method == "POST":
+        name = request.form.get("name")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        inventario.crear_usuario(name, email, password)
+        return redirect(url_for("index"))
+    else:
+        flash("No se pudo crear la cuenta", "error")
+        return redirect(url_for("registro"))
+    
+@app.route("/place")
+def place():
+    if usuario == None:
+        return redirect(url_for("index"))
+    return render_template("placeholder.html")
     
 if __name__ == '__main__':
     app.run(debug=True)
