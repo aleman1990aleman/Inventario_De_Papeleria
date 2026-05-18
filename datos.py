@@ -76,7 +76,7 @@ class Inventario:
             usuario = self.usuarios.find_one({"email": email})
             if usuario:
                 usuario['email'] = str(usuario['email'])
-            return usuario["email"]
+            return usuario
         except Exception as e:
             print(f"Error al obtener usuario por email: {e}")
             return None

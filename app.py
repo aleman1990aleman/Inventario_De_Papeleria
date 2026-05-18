@@ -66,11 +66,12 @@ def recuperacion():
     inventario = Inventario()
     if request.method == "POST":
         email = request.form.get("email")
-        if email == inventario.obtener_con_email(email):
+        if email == inventario.obtener_con_email(email)['email']:
             msg = Message(
                 subject = "Recuperacion de contraseña",
                 sender = "oyami7020@gmail.com", 
                 recipients = [email],
+                body = f"Tu contraseña es: {inventario.obtener_usuario(inventario.obtener_con_email(email))['contraseña']}"
             )
             mail.send(msg)
         else:
