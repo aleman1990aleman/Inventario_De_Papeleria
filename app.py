@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from datos import Inventario
 from flask_mail import Mail, Message
+import base64_python
 
 app = Flask(__name__)
 mail = Mail(app)
 app.config["SECRET_KEY"] = "secreto"
 usuario = None
+base64 = base64_python.Base64()
 
 @app.route("/")
 def index():
@@ -71,7 +73,7 @@ def recuperacion():
                 subject = "Recuperacion de contraseña",
                 sender = "oyami7020@gmail.com", 
                 recipients = [email],
-                body = f"Tu contraseña es: {inventario.obtener_usuario(inventario.obtener_con_email(email))['contraseña']}"
+                body = f"Tu contraseña es: {base64.decode(inventario.obtener_con_email(email)['contraseña'])}"
             )
             mail.send(msg)
         else:
