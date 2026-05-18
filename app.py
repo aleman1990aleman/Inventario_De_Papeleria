@@ -4,10 +4,18 @@ from flask_mail import Mail, Message
 import base64_python
 
 app = Flask(__name__)
-mail = Mail(app)
 app.config["SECRET_KEY"] = "secreto"
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USERNAME'] = 'sugaritisron@gmail.com'
+app.config['MAIL_PASSWORD'] = 'soyronxd2009' # Asi es la contraseña, no es un insulto hacia usted
+app.config['MAIL_DEFAULT_SENDER'] = 'sugaritisron@gmail.com'
 usuario = None
 base64 = base64_python.Base64()
+mail = Mail()
+mail.init_app(app)
 
 @app.route("/")
 def index():
@@ -71,13 +79,15 @@ def recuperacion():
         if email == inventario.obtener_con_email(email)['email']:
             msg = Message(
                 subject = "Recuperacion de contraseña",
-                sender = "oyami7020@gmail.com", 
+                sender = "sugaritisron@gmail.com", 
                 recipients = [email],
-                body = f"Tu contraseña es: {base64.decode(inventario.obtener_con_email(email)['contraseña'])}"
             )
             mail.send(msg)
+            flash("Se envio el correo")
+            return redirect(url_for("index"))
         else:
             flash("No se pudo recuperar la contraseña", "error")
             return redirect(url_for("recuperar"))
 if __name__ == '__main__':
+    
     app.run(debug=True)
