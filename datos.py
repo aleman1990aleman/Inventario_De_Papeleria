@@ -69,3 +69,14 @@ class Inventario:
         except Exception as e:
             print(f"Error al iniciar sesión: {e}")
             return None
+        
+    def obtener_con_email(self, email: str) -> Optional[Dict]:
+        """Obtener usuario por e-mail"""
+        try:
+            usuario = self.usuarios.find_one({"email": email})
+            if usuario:
+                usuario['email'] = str(usuario['email'])
+            return usuario["email"]
+        except Exception as e:
+            print(f"Error al obtener usuario por email: {e}")
+            return None

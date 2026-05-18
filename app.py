@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from datos import Inventario
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
+mail = Mail(app)
 app.config["SECRET_KEY"] = "secreto"
 usuario = None
 
@@ -51,6 +53,28 @@ def place():
     if usuario == None:
         return redirect(url_for("index"))
     return render_template("placeholder.html")
-    
+
+@app.route("/recuperar")
+def recuperar():
+    if usuario != None:
+        return redirect(url_for("place"))
+    return render_template("recuperar.html")
+
+@app.route("/recuperacion", methods=["POST", "GET"])
+def recuperacion():
+    global usuario 
+    inventario = Inventario()
+    if request.method == "POST":
+        email = request.form.get("email")
+        if email == inventario.obtener_con_email(email):
+            msg = Message(
+                subject = "Recuperacion de contraseña",
+                sender = "oyami7020@gmail.com", 
+                recipients = [email],
+            )
+            mail.send(msg)
+        else:
+            flash("No se pudo recuperar la contraseña", "error")
+            return redirect(url_for("recuperar"))
 if __name__ == '__main__':
     app.run(debug=True)
