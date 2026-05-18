@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block titulo %}Recuperar contraseña{% endblock %}
+
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white text-center">
+                <h3 class="mb-0">Recuperar contraseña</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/recuperacion">
+                    <div class="mb-3">
+                        <label class="form-label">Contraseña</label>
+                        <input type="password" name="password" class="form-control" minlenght="8" maxlenght="50" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Recuperar</button>
+                </form>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
