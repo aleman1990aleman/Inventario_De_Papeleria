@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, abort
 from datos import Inventario
 from flask_mail import Mail, Message
 import base64_python
@@ -11,7 +11,7 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 app.config['MAIL_USERNAME'] = 'oyami7020@gmail.com'
 app.config['MAIL_PASSWORD'] = 'hzraxcsdxftkxkon'
-app.config['MAIL_DEFAULT_SENDER'] = 'sugaritisron@gmail.com'
+app.config['MAIL_DEFAULT_SENDER'] = 'oyami7020@gmail.com'
 usuario = None
 base64 = base64_python.Base64()
 mail = Mail()
@@ -76,7 +76,8 @@ def recuperacion():
     inventario = Inventario()
     if request.method == "POST":
         email = request.form.get("email")
-        if email == inventario.obtener_con_email(email)['email']:
+        usuario_encontrado = inventario.obtener_con_email(email)
+        if usuario_encontrado != None:
             msg = Message(
                 subject = "Recuperacion de contraseña",
                 sender = "sugaritisron@gmail.com", 
