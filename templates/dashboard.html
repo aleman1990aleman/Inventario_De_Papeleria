@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block titulo %}Panel de Control - Inventario Papelería{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card shadow border-0">
+                <div class="card-body bg-primary text-white">
+                    <h2 class="mb-0">Panel de Inventario - Papelería</h2>
+                    <p class="mb-0">Control y administración de productos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row text-center mb-4">
+
+        <div class="col-md-3 mb-3">
+            <div class="card shadow border-success">
+                <div class="card-body">
+                    <h5 class="text-success">Productos</h5>
+                    <h2>125</h2>
+                    <p class="text-muted">Artículos registrados</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card shadow border-warning">
+                <div class="card-body">
+                    <h5 class="text-warning">Stock Bajo</h5>
+                    <h2>8</h2>
+                    <p class="text-muted">Productos por reabastecer</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card shadow border-info">
+                <div class="card-body">
+                    <h5 class="text-info">Ventas Hoy</h5>
+                    <h2>$3,450</h2>
+                    <p class="text-muted">Ingresos diarios</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card shadow border-danger">
+                <div class="card-body">
+                    <h5 class="text-danger">Pedidos</h5>
+                    <h2>12</h2>
+                    <p class="text-muted">Órdenes pendientes</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow h-100 text-center">
+                <div class="card-body">
+                    <h5>Agregar Producto</h5>
+                    <p class="text-muted">
+                        Registrar nuevos artículos al inventario.
+                    </p>
+                    <a href="/agregar-producto" class="btn btn-success">
+                        Ir
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow h-100 text-center">
+                <div class="card-body">
+                    <h5>Gestionar Stock</h5>
+                    <p class="text-muted">
+                        Actualizar existencias y revisar productos.
+                    </p>
+                    <a href="/stock" class="btn btn-warning text-white">
+                        Ir
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow h-100 text-center">
+                <div class="card-body">
+                    <h5>Ventas</h5>
+                    <p class="text-muted">
+                        Consultar ventas y movimientos diarios.
+                    </p>
+                    <a href="/ventas" class="btn btn-primary">
+                        Ir
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
