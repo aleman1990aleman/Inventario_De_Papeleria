@@ -30,7 +30,7 @@ def login():
         password = request.form.get("password")
         usuario = inventario.acceder(email, password)
         if usuario != None:
-            return redirect(url_for("place"))
+            return redirect(url_for("dashboard"))
         elif usuario == None:
             flash("Error al iniciar sesión", "error")
             return redirect(url_for("index"))
@@ -89,6 +89,12 @@ def recuperacion():
         else:
             flash("No se pudo recuperar la contraseña", "error")
             return redirect(url_for("recuperar"))
+        
+@app.route("/dashboard")
+def dashboard():
+    global usuario
+    if usuario != None:
+        return render_template("dashboard.html")
+    return redirect(url_for("index"))
 if __name__ == '__main__':
-    
     app.run(debug=True)
