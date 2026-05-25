@@ -96,5 +96,26 @@ def dashboard():
     if usuario != None:
         return render_template("dashboard.html")
     return redirect(url_for("index"))
+
+@app.route("/añadir")
+def añadir():
+    global usuario
+    if usuario != None:
+        return render_template("añadir_producto.html")
+    return redirect(url_for("index"))
+
+@app.route("/agregar-producto", methods=["POST", "GET"])
+def agregar():
+    inventario = Inventario()
+    if request.method == "POST":
+        name = request.form.get("nombre")
+        categoria = request.form.get("categoria")
+        cantidad = request.form.get("cantidad")
+        precio = request.form.get("precio")
+        inventario.crear_producto(name, precio, cantidad, categoria)
+        return redirect(url_for("index"))
+    else:
+        flash("No se pudo añadir el producto", "error")
+        return redirect(url_for("registro"))
 if __name__ == '__main__':
     app.run(debug=True)

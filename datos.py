@@ -82,7 +82,7 @@ class Inventario:
             print(f"Error al obtener usuario por email: {e}")
             return None
         
-    def crear_producto(self, nombre: str, precio: float, stock: int, descripcion: str) -> Optional[str]:
+    def crear_producto(self, nombre: str, precio: float, stock: int, categoria: str) -> Optional[str]:
         """Crear un nuevo usuario"""
         try:
             resultado = self.usuarios.insert_one({
@@ -90,7 +90,7 @@ class Inventario:
                 "nombre": nombre,
                 "precio": precio,
                 "stock": stock,
-                "descripcion": descripcion,
+                "categoria": categoria,
                 "fecha_agregado": datetime.now()
             })
             return str(resultado.inserted_id)
