@@ -81,3 +81,19 @@ class Inventario:
         except Exception as e:
             print(f"Error al obtener usuario por email: {e}")
             return None
+        
+    def crear_producto(self, nombre: str, precio: float, stock: int, descripcion: str) -> Optional[str]:
+        """Crear un nuevo usuario"""
+        try:
+            resultado = self.usuarios.insert_one({
+                "_id": ObjectId(),
+                "nombre": nombre,
+                "precio": precio,
+                "stock": stock,
+                "descripcion": descripcion,
+                "fecha_agregado": datetime.now()
+            })
+            return str(resultado.inserted_id)
+        except DuplicateKeyError:
+            print(f"❌ Error: El email {email} ya está registrado")
+            return None
