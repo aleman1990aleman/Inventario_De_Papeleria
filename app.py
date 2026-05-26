@@ -120,16 +120,12 @@ def agregar():
         flash("No se pudo añadir el producto", "error")
         return redirect(url_for("añadir"))
     
-@app.route("/eliminar", methods=["POST", "GET"])
+@app.route("/eliminar-producto/<producto-id>", methods=["POST", "GET"])
 def agregar():
     inventario = Inventario()
     if request.method == "POST":
-        name = request.form.get("nombre")
-        categoria = request.form.get("categoria")
-        cantidad = request.form.get("cantidad")
-        precio = request.form.get("precio")
-        inventario.crear_producto(name, precio, cantidad, categoria)
-        return redirect(url_for("añadir"))
+        productos = inventario.productos
+        productos.delete_one({"_id": producto-id})
     else:
         flash("No se pudo añadir el producto", "error")
         return redirect(url_for("añadir"))
