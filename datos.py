@@ -20,7 +20,6 @@ class Inventario:
             self.compras = self.db['compras']
             self.ventas = self.db['ventas']
             self.proveedores = self.db['proveedores']
-            self.cursor = self.productos.find()
             
             # Crear índices necesarios
             self._crear_indices()
@@ -94,7 +93,6 @@ class Inventario:
                 "categoria": categoria,
                 "fecha_agregado": datetime.now()
             })
-            return str(resultado.inserted_id)
         except DuplicateKeyError:
             print(f"❌ Error: El email {email} ya está registrado")
             return None

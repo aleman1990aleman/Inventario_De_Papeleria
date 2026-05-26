@@ -17,7 +17,6 @@ base64 = base64_python.Base64()
 mail = Mail()
 mail.init_app(app)
 inventario = Inventario()
-cursor = inventario.cursor
 
 @app.route("/")
 def index():
@@ -102,11 +101,26 @@ def dashboard():
 @app.route("/añadir")
 def añadir():
     global usuario
+    cursor = list(inventario.productos.find())
     if usuario != None:
-        return render_template("añadir_producto.html")
+        return render_template("añadir_producto.html", cursor=cursor)
     return redirect(url_for("index"))
 
 @app.route("/agregar-producto", methods=["POST", "GET"])
+def agregar():
+    inventario = Inventario()
+    if request.method == "POST":
+        name = request.form.get("nombre")
+        categoria = request.form.get("categoria")
+        cantidad = request.form.get("cantidad")
+        precio = request.form.get("precio")
+        inventario.crear_producto(name, precio, cantidad, categoria)
+        return redirect(url_for("añadir"))
+    else:
+        flash("No se pudo añadir el producto", "error")
+        return redirect(url_for("añadir"))
+    
+@app.route("/eliminar", methods=["POST", "GET"])
 def agregar():
     inventario = Inventario()
     if request.method == "POST":
