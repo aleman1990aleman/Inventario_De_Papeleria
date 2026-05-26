@@ -20,6 +20,7 @@ class Inventario:
             self.compras = self.db['compras']
             self.ventas = self.db['ventas']
             self.proveedores = self.db['proveedores']
+            self.cursor = self.productos.find()
             
             # Crear índices necesarios
             self._crear_indices()
@@ -85,7 +86,7 @@ class Inventario:
     def crear_producto(self, nombre: str, precio: float, stock: int, categoria: str) -> Optional[str]:
         """Crear un nuevo usuario"""
         try:
-            resultado = self.usuarios.insert_one({
+            resultado = self.productos.insert_one({
                 "_id": ObjectId(),
                 "nombre": nombre,
                 "precio": precio,

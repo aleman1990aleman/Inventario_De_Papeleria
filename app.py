@@ -16,6 +16,8 @@ usuario = None
 base64 = base64_python.Base64()
 mail = Mail()
 mail.init_app(app)
+inventario = Inventario()
+cursor = inventario.cursor
 
 @app.route("/")
 def index():
@@ -113,9 +115,9 @@ def agregar():
         cantidad = request.form.get("cantidad")
         precio = request.form.get("precio")
         inventario.crear_producto(name, precio, cantidad, categoria)
-        return redirect(url_for("index"))
+        return redirect(url_for("añadir"))
     else:
         flash("No se pudo añadir el producto", "error")
-        return redirect(url_for("registro"))
+        return redirect(url_for("añadir"))
 if __name__ == '__main__':
     app.run(debug=True)
