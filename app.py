@@ -132,5 +132,13 @@ def eliminar():
     else:
         flash("No se pudo eliminar el producto", "error")
         return redirect(url_for("añadir"))
+    
+@app.route("/stock")
+def añadir():
+    global usuario
+    cursor = list(inventario.productos.find({}))
+    if usuario != None:
+        return render_template("stock.html", cursor=cursor)
+    return redirect(url_for("index"))
 if __name__ == '__main__':
     app.run(debug=True)
