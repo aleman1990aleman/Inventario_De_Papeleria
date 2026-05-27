@@ -134,7 +134,7 @@ def eliminar():
         return redirect(url_for("añadir"))
     
 @app.route("/stock")
-def añadir():
+def stock():
     global usuario
     cursor = list(inventario.productos.find({}))
     if usuario != None:
