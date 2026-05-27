@@ -157,8 +157,8 @@ def actualizar():
         else:
             flash("No se pudo aztualizar el producto", "error")
             return redirect(url_for("añadir"))
-    except Exception:
-        flash("Ocurrio un error desconocido")
+    except Exception as e:
+        flash(f"Ocurrio un error: {e}", "error")
         return redirect(url_for("stock"))
 if __name__ == '__main__':
     app.run(debug=True)
