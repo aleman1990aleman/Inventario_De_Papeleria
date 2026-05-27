@@ -159,6 +159,6 @@ def actualizar():
             return redirect(url_for("añadir"))
     except Exception:
         flash("Ocurrio un error desconocido")
-        return redirect(url_for("añadir"))
+        return redirect(url_for("stock"))
 if __name__ == '__main__':
     app.run(debug=True)
