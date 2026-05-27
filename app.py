@@ -101,7 +101,7 @@ def dashboard():
 @app.route("/añadir")
 def añadir():
     global usuario
-    cursor = list(inventario.productos.find())
+    cursor = list(inventario.productos.find({}))
     if usuario != None:
         return render_template("añadir_producto.html", cursor=cursor)
     return redirect(url_for("index"))
@@ -115,19 +115,22 @@ def agregar():
         cantidad = request.form.get("cantidad")
         precio = request.form.get("precio")
         inventario.crear_producto(name, precio, cantidad, categoria)
+        flash("El producto es creo correctamente")
         return redirect(url_for("añadir"))
     else:
         flash("No se pudo añadir el producto", "error")
         return redirect(url_for("añadir"))
     
-@app.route("/eliminar-producto/<producto-id>", methods=["POST", "GET"])
-def agregar():
+@app.route("/eliminar-producto", methods=["POST", "GET"])
+def eliminar():
     inventario = Inventario()
     if request.method == "POST":
-        productos = inventario.productos
-        productos.delete_one({"_id": producto-id})
+        id = request.form.get("producto_id")
+        inventario.eliminar_producto(id)
+        flash("El producto se elimino exitosamente")
+        return redirect(url_for("añadir"))
     else:
-        flash("No se pudo añadir el producto", "error")
+        flash("No se pudo eliminar el producto", "error")
         return redirect(url_for("añadir"))
 if __name__ == '__main__':
     app.run(debug=True)

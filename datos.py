@@ -96,3 +96,7 @@ class Inventario:
         except DuplicateKeyError:
             print(f"❌ Error: El email {email} ya está registrado")
             return None
+    def eliminar_producto(self, producto_id: str) -> bool:
+        """Eliminar una tarea"""
+        resultado = self.productos.delete_one({"_id": ObjectId(producto_id)})
+        return resultado.deleted_count > 0

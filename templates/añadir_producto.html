@@ -53,13 +53,13 @@
                             {% if cursor %}
                             {% for producto in cursor %}
                             <div>
-                                <h5 class="mb-1">{{cursor.nombre}}</h5>
-                                <small class="text-muted">
-                                    Categoría: {{cursor.categoria}} | Cantidad: {{cursor.stock}} | Precio: ${{cursor.precio}}
-                                </small>
+                                <h5 class="mb-1">{{producto.nombre}}</h5>
+                                <div class="text-center">
+                                    Categoría: {{producto.categoria}} | Cantidad: {{producto.stock}} | Precio: ${{producto.precio}}
+                                </div>
                             </div>
-                            <form method="POST" action="/eliminar-producto/{{cursor._id}}">
-                                <input type="hidden" name="id" value="1">
+                            <form method="POST" action="/eliminar-producto">
+                                <input type="hidden" name="producto_id" value="{{producto._id}}">
                                 <button type="submit" class="btn btn-danger btn-sm">
                                     Eliminar
                                 </button>
