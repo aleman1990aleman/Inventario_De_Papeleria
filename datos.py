@@ -100,3 +100,13 @@ class Inventario:
         """Eliminar una tarea"""
         resultado = self.productos.delete_one({"_id": ObjectId(producto_id)})
         return resultado.deleted_count > 0
+    def actualizar_producto(self, id: ObjectId, nombre: str, precio: float, stock: int, categoria: str) -> Optional[str]:
+        """Crear un nuevo usuario"""
+        try:
+            filtro = {"_id": id}
+            nuevos_valores = {"$set": {"nombre": nombre, "precio": precio, "stock": stock, "categoria": categoria}}
+            resultado = self.productos.update_one(filtro, nuevos_valores)
+            return resultado.modified_count > 0
+        except DuplicateKeyError:
+            print(f"❌ Error: El email {email} ya está registrado")
+            return None
