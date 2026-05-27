@@ -84,29 +84,21 @@ class Inventario:
         
     def crear_producto(self, nombre: str, precio: float, stock: int, categoria: str) -> Optional[str]:
         """Crear un nuevo usuario"""
-        try:
-            resultado = self.productos.insert_one({
-                "_id": ObjectId(),
-                "nombre": nombre,
-                "precio": precio,
-                "stock": stock,
-                "categoria": categoria,
-                "fecha_agregado": datetime.now()
+        resultado = self.productos.insert_one({
+            "_id": ObjectId(),
+            "nombre": nombre,
+            "precio": precio,
+            "stock": stock,
+            "categoria": categoria,
+            "fecha_agregado": datetime.now()
             })
-        except DuplicateKeyError:
-            print(f"❌ Error: El email {email} ya está registrado")
-            return None
     def eliminar_producto(self, producto_id: str) -> bool:
         """Eliminar una tarea"""
         resultado = self.productos.delete_one({"_id": ObjectId(producto_id)})
         return resultado.deleted_count > 0
     def actualizar_producto(self, id: ObjectId, nombre: str, precio: float, stock: int, categoria: str) -> Optional[str]:
         """Crear un nuevo usuario"""
-        try:
-            filtro = {"_id": ObjectId(id)}
-            nuevos_valores = {"$set": {"nombre": nombre, "precio": precio, "stock": stock, "categoria": categoria}}
-            resultado = self.productos.update_one(filtro, nuevos_valores)
-            return resultado.modified_count > 0
-        except DuplicateKeyError:
-            print(f"❌ Error: El email {email} ya está registrado")
-            return None
+        filtro = {"_id": ObjectId(id)}
+        nuevos_valores = {"$set": {"nombre": nombre, "precio": precio, "stock": stock, "categoria": categoria}}
+        resultado = self.productos.update_one(filtro, nuevos_valores)
+        return resultado.modified_count > 0

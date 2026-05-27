@@ -140,5 +140,21 @@ def stock():
     if usuario != None:
         return render_template("stock.html", cursor=cursor)
     return redirect(url_for("index"))
+
+@app.route("/actualizar-producto", methods=["POST", "GET"])
+def actualizar():
+    inventario = Inventario()
+    if request.method == "POST":
+        id = request.form.get("id")
+        name = request.form.get("nombre")
+        categoria = request.form.get("categoria")
+        cantidad = request.form.get("cantidad")
+        precio = request.form.get("precio")
+        inventario.crear_producto(id, name, precio, cantidad, categoria)
+        flash("El producto es actualizo correctamente")
+        return redirect(url_for("añadir"))
+    else:
+        flash("No se pudo aztualizar el producto", "error")
+        return redirect(url_for("añadir"))
 if __name__ == '__main__':
     app.run(debug=True)
