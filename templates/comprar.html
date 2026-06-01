@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block titulo %}Registrar Compra{% endblock %}
+
+{% block contenido %}
+
+<div class="card shadow">
+    <div class="card-header bg-primary text-white">
+        <h3>Registrar Compra</h3>
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="mb-3">
+                <label class="form-label">Producto</label>
+                <input type="text" class="form-control" name="producto" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Cantidad Comprada</label>
+                <input type="number" class="form-control" name="cantidad" min="1" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Costo Unitario</label>
+                <input type="number" class="form-control" name="costo" step="0.01" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Proveedor</label>
+                <input type="text" class="form-control" name="proveedor" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Registrar Compra
+            </button>
+
+            <button type="button" class="btn btn-secondary"
+                onclick="history.back()">
+                Regresar
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

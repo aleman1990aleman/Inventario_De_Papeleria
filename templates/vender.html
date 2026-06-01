@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block titulo %}Registrar Venta{% endblock %}
+
+{% block contenido %}
+
+<div class="card shadow">
+    <div class="card-header bg-success text-white">
+        <h3>Registrar Venta</h3>
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="mb-3">
+                <label class="form-label">Producto</label>
+                <select class="form-select" name="producto" required>
+                    <option value="">Seleccione un producto</option>
+                    <option>Lápiz</option>
+                    <option>Cuaderno</option>
+                    <option>Pluma</option>
+                    <option>Borrador</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Cantidad</label>
+                <input type="number" class="form-control" name="cantidad" min="1" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Precio Unitario</label>
+                <input type="number" class="form-control" name="precio" step="0.01" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Cliente</label>
+                <input type="text" class="form-control" name="cliente">
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                Registrar Venta
+            </button>
+
+            <button type="button" class="btn btn-secondary"
+                onclick="history.back()">
+                Regresar
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
