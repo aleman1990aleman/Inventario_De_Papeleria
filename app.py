@@ -160,5 +160,6 @@ def actualizar():
     except Exception as e:
         flash(f"Ocurrio un error: {e}", "error")
         return redirect(url_for("stock"))
+    
 if __name__ == '__main__':
     app.run(debug=True)
