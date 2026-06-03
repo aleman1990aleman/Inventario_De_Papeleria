@@ -160,6 +160,36 @@ def actualizar():
     except Exception as e:
         flash(f"Ocurrio un error: {e}", "error")
         return redirect(url_for("stock"))
+
+@app.route("/vender", methods=["GET", "POST"])
+def vender():
+
+    if request.method == "POST":
+
+        producto = request.form["producto"]
+        cantidad = int(request.form["cantidad"])
+        precio = float(request.form["precio"])
+        cliente = request.form["cliente"]
+
+        flash("Venta registrada correctamente")
+        return redirect(url_for("vender"))
+
+    return render_template("vender.html")
+
+@app.route("/comprar", methods=["GET", "POST"])
+def comprar():
+
+    if request.method == "POST":
+
+        producto = request.form["producto"]
+        cantidad = int(request.form["cantidad"])
+        costo = float(request.form["costo"])
+        proveedor = request.form["proveedor"]
+
+        flash("Compra registrada correctamente")
+        return redirect(url_for("comprar"))
+
+    return render_template("comprar.html")
     
 if __name__ == '__main__':
     app.run(debug=True)
