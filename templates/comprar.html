@@ -14,8 +14,14 @@
         <form method="POST">
 
             <div class="mb-3">
-                <label class="form-label"> ID del Producto</label>
-                <input type="text" class="form-control" name="producto" required>
+                <label class="form-label">Producto</label>
+                <select class="form-select" name="producto" required>
+                    {% if cursor %}
+                    {% for producto in cursor %}
+                    <option value="{{producto._id}}">{{producto.nombre}}</option>
+                    {{% endfor %}}
+                    {% endif %}
+                </select>
             </div>
 
             <div class="mb-3">
