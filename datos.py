@@ -107,7 +107,7 @@ class Inventario:
         filtro = {"_id": ObjectId(id)}
         original = self.productos.find_one(filtro)
         nuevos_valores = {"$set": {"stock": int(original["stock"]) - stock}}
-        if original >= stock:
+        if int(original["stock"]) >= stock:
             resultado = self.productos.update_one(filtro, nuevos_valores)
             return resultado.modified_count > 0
         else:
