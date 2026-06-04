@@ -106,7 +106,7 @@ class Inventario:
         """Crear un nuevo usuario"""
         filtro = {"_id": ObjectId(id)}
         original = self.productos.find_one(filtro)
-        nuevos_valores = {"$set": {"stock": original - stock}}
+        nuevos_valores = {"$set": {"stock": int(original.stock) - stock}}
         if original >= stock:
             resultado = self.productos.update_one(filtro, nuevos_valores)
             return resultado.modified_count > 0
