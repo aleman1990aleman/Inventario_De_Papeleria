@@ -102,3 +102,13 @@ class Inventario:
         nuevos_valores = {"$set": {"nombre": nombre, "precio": precio, "stock": stock, "categoria": categoria}}
         resultado = self.productos.update_one(filtro, nuevos_valores)
         return resultado.modified_count > 0
+    def actualizar_stock(self, id: ObjectId, stock: int) -> Optional[str]:
+        """Crear un nuevo usuario"""
+        filtro = {"_id": ObjectId(id)}
+        original = self.productos.find_one(filtro)
+        nuevos_valores = {"$set": {"stock": original - stock}}
+        if original >= stock:
+            resultado = self.productos.update_one(filtro, nuevos_valores)
+            return resultado.modified_count > 0
+        else:
+            return None

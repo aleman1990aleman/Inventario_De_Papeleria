@@ -163,18 +163,26 @@ def actualizar():
 
 @app.route("/vender", methods=["GET", "POST"])
 def vender():
+    inventario = Inventario()
+    global usuario
     cursor = list(inventario.productos.find({}))
-    if request.method == "POST":
-
-        producto = request.form["producto"]
-        cantidad = int(request.form["cantidad"])
-        precio = float(request.form["precio"])
-        cliente = request.form["cliente"]
-
-        flash("Venta registrada correctamente")
+    try:
+        if request.method == "POST":
+            producto = request.form["producto"]
+            cantidad = int(request.form["cantidad"])
+            precio = float(request.form["precio"])
+            cliente = request.form["cliente"]
+            if inventario.actualizar_stock(producto, cantidad) != None:
+                inventario.actualizar_stock(producto, cantidad)
+                flash("Venta registrada correctamente")
+            return redirect(url_for("vender"))
+        if usuario != None:
+            return render_template("vender.html", cursor=cursor)
+        else:
+            return redirect(url_for("index"))
+    except Exception as e:
+        flash(f"Ocurrio un error: {e}", "error")
         return redirect(url_for("vender"))
-
-    return render_template("vender.html", cursor=cursor)
 
 @app.route("/comprar", methods=["GET", "POST"])
 def comprar():
@@ -185,11 +193,15 @@ def comprar():
         cantidad = int(request.form["cantidad"])
         costo = float(request.form["costo"])
         proveedor = request.form["proveedor"]
-
-        flash("Compra registrada correctamente")
+        if inventario.actualizar_stock(producto, cantidad) != None:
+            inventario.actualizar_stock(producto, cantidad)
+            flash("Compra registrada correctamente")
         return redirect(url_for("comprar"))
 
-    return render_template("comprar.html", cursor=cursor)
+    if usuario != None:
+        return render_template("comprar.html", cursor=cursor)
+    else:
+        return redirect(url_for("index"))
     
 if __name__ == '__main__':
     app.run(debug=True)
