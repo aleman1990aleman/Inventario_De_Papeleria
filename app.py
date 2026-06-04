@@ -163,7 +163,7 @@ def actualizar():
 
 @app.route("/vender", methods=["GET", "POST"])
 def vender():
-
+    cursor = list(inventario.productos.find({}))
     if request.method == "POST":
 
         producto = request.form["producto"]
@@ -174,11 +174,11 @@ def vender():
         flash("Venta registrada correctamente")
         return redirect(url_for("vender"))
 
-    return render_template("vender.html")
+    return render_template("vender.html", cursor=cursor)
 
 @app.route("/comprar", methods=["GET", "POST"])
 def comprar():
-
+    cursor = list(inventario.productos.find({}))
     if request.method == "POST":
 
         producto = request.form["producto"]
@@ -189,7 +189,7 @@ def comprar():
         flash("Compra registrada correctamente")
         return redirect(url_for("comprar"))
 
-    return render_template("comprar.html")
+    return render_template("comprar.html", cursor=cursor)
     
 if __name__ == '__main__':
     app.run(debug=True)
