@@ -19,7 +19,7 @@
                     {% if cursor %}
                     {% for producto in cursor %}
                     <option value="{{producto._id}}">{{producto.nombre}}</option>
-                    {{% endfor %}}
+                    {% endfor %}
                     {% endif %}
                 </select>
             </div>
