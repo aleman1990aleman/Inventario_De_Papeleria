@@ -175,6 +175,8 @@ def vender():
             if inventario.actualizar_stock(producto, cantidad) != None:
                 inventario.actualizar_stock(producto, cantidad)
                 flash("Venta registrada correctamente")
+            else:
+                flash("Ya no hay existencia", "error")
             return redirect(url_for("vender"))
         if usuario != None:
             return render_template("vender.html", cursor=cursor)
@@ -196,6 +198,8 @@ def comprar():
         if inventario.actualizar_stock(producto, cantidad) != None:
             inventario.actualizar_stock(producto, cantidad)
             flash("Compra registrada correctamente")
+        else:
+            flash("Ya no hay existencia", "error")
         return redirect(url_for("comprar"))
 
     if usuario != None:
